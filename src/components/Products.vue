@@ -33,16 +33,16 @@
           <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</p>
         </div>
         <p class="is-pulled-right">
-          <span class="title is-4" v-money="'R$'">{{ product.PRECO}}</span>
+          <span class="title is-4" v-money="'R$'">{{ product.PRECO}}  {{product.isAddedToCart}}</span>
         </p>
       </div>
       <div class="card-footer btn-actions">
         <div class="card-footer-item field is-grouped">
           <div class="buttons">
-            <button class="button is-primary" v-if="!$store.state.products.ID_PRODUTO" @click="addToCart(product.ID_PRODUTO, product.CNPJ_MERCADO)">{{ addToCartLabel }}</button>
+            <button class="button is-primary" v-if="!product.isAddedToCart" @click="addToCart(product.ID_PRODUTO)">{{ addToCartLabel }}</button>
             <button class="button is-text" v-if="product.isAddedToCart" @click="removeFromCart(product.id, false)">{{ removeFromCartLabel }}</button>
             <div>
-              <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
+              <button class="button is-small" :PRODUTO="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
                 <span class="icon is-small">
                   <i class="fas fa-heart"></i>
                 </span>
@@ -107,6 +107,8 @@ export default {
     if (this.$store.state.products.ESTOQUE > 1) {
       this.selected = this.$store.state.products.ESTOQUE;
     }
+
+    this.$store.dispatch('getCart')
   },
 
   computed: {
@@ -116,19 +118,22 @@ export default {
   },
 
   methods: {
-    addToCart (ID_PRODUTO, CNPJ_MERCADO) {
-      
-       let id = ID_PRODUTO
-       let cnpj = CNPJ_MERCADO
-       let quantidade = this.selected
-       let payload = {
-         id: id,
-         cnpj: cnpj,
-         quantidade: quantidade
-       }
-      //this.$store.commit('addToCart', id);
-      this.$store.dispatch('addToCart', payload);
 
+    addToCart (id) {
+    
+      let data = {
+        user_id:5,
+        produto_id: id,
+        quantity: this.selected,
+        cnpj:'00428414000116',
+        status: true
+  
+      }
+      //this.$store.commit('addToCart', id);
+    
+      this.$store.dispatch('addToCart', data)
+      this.$store.dispatch('getCart')
+      //this.$store.commit('setAddedBtn', data);
     },
     removeFromCart (id) {
       let data = {

@@ -77,7 +77,12 @@
 
     computed: {
       numProductsAdded () {
-        return this.$store.getters.productsAdded.length;
+        //faz o return para exibir a quantidade de produtos add o carinho
+        return this.$store.getters.productsAdded2;
+        //return this.$store.state.cart.total
+      },
+      numTotalCart () {
+        return this.$store.state.cart.total
       }
     },
 

@@ -14,15 +14,14 @@ export default new Vuex.Store({
       name: '',
       productTitleSearched: ''
     },
-    cart: [
+    cart:
       {
-      ID_PRODUTO: '',
-      CNPJ:'',
+      produtos:[],
+      total:0,
       isAddedToCart: false,
       isAddedBtn: false,
       isFavourite: false,
-    }
-  ],
+    },
     userInfo: {
       isLoggedIn: false, 
       isSignedUp: false,
@@ -40,8 +39,12 @@ export default new Vuex.Store({
   getters: {
     productsAdded: state => {
       return state.products.filter(el => {
-       
+       return el.isAddedToCart;
       });
+    },
+    productsAdded2: state => {
+      console.log(state.cart.total)
+      return state.cart.total
     },
     productsAddedToFavourite: state => {
       return state.products.filter(el => {
@@ -75,18 +78,25 @@ export default new Vuex.Store({
   },
   
   mutations: {
+
+   setTotal: (state, produtos) => {
+
+    state.cart.total = produtos.length
+    state.cart.produtos = produtos
+
+    },
     addToCart: (state, id) => {
       state.products.forEach(el => {
-        if (ID_PRODUTO === el.ID_PRODUTO) {
-          el.state.cart.isAddedToCart = true;
+        if (id === el.ID_PRODUTO) {
+          el.isAddedToCart = true;
         }
       });
 
     },
     setAddedBtn: (state, data) => {
       state.products.forEach(el => {
-        if (data.ID_PRODUTO === el.ID_PRODUTO) {
-          el.state.cart.isAddedBtn = data.status;
+        if (data.id === el.ID_PRODUTO) {
+          el.isAddedBtn = data.status;
         }
       });
     },
@@ -142,43 +152,63 @@ export default new Vuex.Store({
     },
     quantity: (state, data) => {
       state.products.forEach(el => {
-        if (data.ID_PRODUTO === el.ID_PRODUTO) {
-          el.ESTOQUE = data.ESTOQUE;
+        if (data.id === el.ID_PRODUTO) {
+          el.ESTOQUE = data.quantity;
         }
       });
     }
   },
-  
+   
   actions: {
     getProducts() {
       //axios aqui
       axios
-        .get("http://191.252.103.186/api/produtos")
+        //.get("http://191.252.103.186/api/produtos")
+        .get("http://192.168.0.107/api/produtos")
         .then(response => {
           let list = [];
           console.log(response.data)
 
           this.state.products = response.data;
-
-          // list = response.data.map(elemento => {
-          //   elemento.quantidade = 0;
-          //   return elemento;
-          //   //list.push(elemento);
-
-          // })
-          // this.state.products = list//response.data;
-          // this.state.products = this.state.products.slice(0, 10);
-
+          
+          for(let t =0; t < this.state.products.length; t++){
+            this.state.products[t].isAddedToCart = false;    
+          }
+         
         })
         .catch(error => {
           console.log(error);
         });
     },
-    addToCart({}, payload){
-
+    getCart({commit}) {
+      const self = this
+      console.log(self)
+      let data = {user_id:'5', cnpj:'00428414000116'}
+      axios
+        .get("http://192.168.0.107/api/getCart",data)
+        .then(response => {
+          console.log(response.data)
+          commit('setTotal', response.data, response.data.length)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    addToCart({commit}, payload){
+      let selfe = this
       console.log(payload)
-      axios.post("http://191.252.103.186/api/addToCart")
-      .then(response => {
+     // axios.post("http://191.252.103.186/api/addToCart")
+      axios.post("http://192.168.0.107/api/addToCart", payload)
+          .then(response => {
+         
+          this.state.products.forEach(el => {
+            if (payload.produto_id === el.ID_PRODUTO ) {
+              el.isAddedToCart = true;
+              console.log(el)
+
+            }
+          });
+      
         console.log(response);
       }).catch(
         console.log("Deu merda!!")
