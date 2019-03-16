@@ -1,6 +1,6 @@
 <template>
   <div>
-   <carousel></carousel>
+ <hero></hero>
     <products-list-container></products-list-container>
     <div v-for="t in products" :key="products.ID_PRODUTO">
       {{t.PRODUTO}}<br>
@@ -11,7 +11,7 @@
 <script>
 import ProductsListContainer from '../products_list/ProductsListContainer';
 
-import Carousel from '../hero/carousel';
+import HeroSection from '../hero/Hero';
 
 export default {
   name: 'homepage-component',
@@ -26,7 +26,7 @@ export default {
   components: {
     'products-list-container': ProductsListContainer,
    
-    'carousel':Carousel
+     'hero': HeroSection
   },
   computed(){
    

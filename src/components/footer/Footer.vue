@@ -2,10 +2,16 @@
   <div class="footer">
     <div class="columns container">
       <div class="column">
-        <p>Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.</p>
+        <p>Contatos para hospedagem de micro ou grandes empresas</p>
+        <p>Tel.:(74) 9-8829-9372</p>
+        <p>Tel.:(74) 9-9901-6492</p>
+        <p>Tel.:(74) 9-8104-7522</p>
+        
+        
+       
       </div>
     <div class="column has-text-right">
-      <p>Vuemmerce | Made with ❤</p>
+      <p>Zap-Compras ❤</p>
     </div>
     </div>
   </div>

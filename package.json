@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
+    "agoraVai": "vue-cli-service serve",
     "production": "vue-cli-service build",
     "development": "vue-cli-service build --mode development"
   },
@@ -25,14 +26,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@chenfengyuan/vue-carousel": "^1.0.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.13",
     "bulma": "^0.7.2",
-    "vue": "^2.6.7",
+    "vue": "^2.5.21",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1"
   },
@@ -44,7 +42,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.7"
+    "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
     "root": true,

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    server: 'localhost:8000',
     products: [],
     userInfo: {
       isLoggedIn: false,
@@ -162,9 +163,14 @@ export default new Vuex.Store({
   actions: {
     getProducts() {
       //axios aqui
+     let headers = {
+        headers: {
+          'Content-Type' : 'application/json'
+        }
+      }
       axios
         //.get("http://191.252.103.186/api/produtos")
-        .get("http://192.168.0.107/api/produtos")
+        .get(`${this.state.server}/api/produtos`, {headers})
         .then(response => {
           let list = [];
           console.log(response.data)
@@ -185,7 +191,7 @@ export default new Vuex.Store({
       console.log(self)
       let data = {user_id:'5', cnpj:'00428414000116'}
       axios
-        .get("http://192.168.0.107/api/getCart",data)
+        .get("http://192.168.0.111/api/getCart",data)
         .then(response => {
           console.log(response.data)
           commit('setTotal', response.data, response.data.length)

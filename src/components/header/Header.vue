@@ -34,13 +34,14 @@
             <a href="#" class="icon" :title="linkedinTooltip">
               <i class="fab fa-linkedin"></i>
             </a>
-          </div>
-          <div class="navbar-item shopping-cart" @click="showCheckoutModal">
-            <span class="icon">
-              <i class="fa fa-shopping-cart"></i>
+            
+            <span class="icon" @click="showCheckoutModal">
+              <i class="fa fa-shopping-cart" ></i>
             </span>
-            <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']">{{ numProductsAdded }}</span>
+            <span :class="[numProductsAdded > 0 ? 'tag is-info' : '']" @click="showCheckoutModal">{{ numProductsAdded }}</span>
+            
           </div>
+
         </div>
       </div>
 
@@ -99,6 +100,7 @@
   };
 </script>
 
+
 <style lang="scss" scoped>
   
   .shopping-cart {
@@ -121,6 +123,5 @@
     margin-left: -5%;
     max-height: 3.75rem;
   }
-
 
 </style>

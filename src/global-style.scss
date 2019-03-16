@@ -48,3 +48,29 @@ $navbar-background-color: $yellow;
 .card-content  {
     padding: 5px;
 }
+@media screen and (max-width: 414px) {
+    .title{
+      font-size: 1rem !important;
+    }
+    
+     .navbar-item img {
+       width: 6rem !important;
+       margin-left: -5%;
+       max-height: 3.75rem;
+       margin-top: 4%;
+     }
+    
+     .card{
+        padding: 1% !important;
+        width: 44%;
+         margin: 2%  5% !important;
+     }
+     
+     .card-content{
+  
+      padding:  -15% 0% !important;
+     }
+   
+   
+    
+   }
