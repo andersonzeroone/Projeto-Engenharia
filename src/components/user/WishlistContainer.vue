@@ -2,7 +2,7 @@
   <div class="section">
     <h3 class="title">{{ pageTitle }}</h3>
     <div class="columns is-centered is-multiline">
-      <div class="card column is-one-quarter" v-for="product in produtos" :key="product.id">
+      <div class="card column is-one-fifth" v-for="product in produtos" :key="product.id">
         <products-component :product="product"></products-component>
       </div>
       <div class="section" v-if="productsInWishlist.length === 0">

@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    server: 'localhost:8000',
+    server: 'http://localhost:8000',
     products: [],
     userInfo: {
       isLoggedIn: false,
@@ -191,7 +191,7 @@ export default new Vuex.Store({
       console.log(self)
       let data = {user_id:'5', cnpj:'00428414000116'}
       axios
-        .get("http://192.168.0.111/api/getCart",data)
+        .get(`${this.state.server}/api/getCart`,data)
         .then(response => {
           console.log(response.data)
           commit('setTotal', response.data, response.data.length)
@@ -204,7 +204,7 @@ export default new Vuex.Store({
       let selfe = this
       console.log(payload)
      // axios.post("http://191.252.103.186/api/addToCart")
-      axios.post("http://192.168.0.107/api/addToCart", payload)
+      axios.post(`${this.state.server}/api/addToCart`, payload)
           .then(response => {
          
           this.state.products.forEach(el => {
