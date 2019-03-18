@@ -8,7 +8,7 @@
         {{product.id}}
         <div class="card-content column is-two-thirds">
           <div class="card-content__title">
-            <h2 class="title is-4">{{ product.PRODUTO.slice(0,13) }}...
+            <h2 class="title is-4">{{ product.PRODUTO}}
               <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.ID_PRODUTO)">
                 <span class="icon is-small">
                   <i class="fas fa-heart"></i>
@@ -140,33 +140,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//  .section{
-//     width: 68%;
-//     margin-left: 15%;
-//   }
-  // .card {
-  //   margin-top: 10%;
-  // }
-
-//  .card-image {
-//     width: 35% !important;
-//   }
-  // .card-content {
-  //   padding: 20px 10px 183px 0;
-  //   &__text {
-  //     margin: 15px 0;
-  //   }
-  //   &__reviews {
-  //     display: inline-block;
-  //     width: 100%;
-  //     margin-bottom: 10px;
-  //   }
-  
-  //   margin-left: 38%;
-  //   width: 55%;
-  //   margin-top: -36%;
-  // }
- 
-  
+ .section{
+    width: 68%;
+    margin-left: 15%;
+  }
+  .card {
+    margin-top: 10%;
+  }
+ .card-image {
+    width: 35% !important;
+  }
+  .card-content {
+    padding: 20px 10px 183px 0;
+    &__text {
+      margin: 15px 0;
+    }
+    &__reviews {
+      display: inline-block;
+      width: 57%;
+      margin-bottom: 10px;
+    }
+    // margin-left: 38%;
+    // width: 55%;
+    // margin-top: -36%;
+  }
 
 </style>
