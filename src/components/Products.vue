@@ -33,7 +33,7 @@
           <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</p>
         </div>
         <p class="is-pulled-right">
-          <span class="title is-4" v-money="'R$'">{{ product.PRECO}}  {{product.isAddedToCart}}</span>
+          <span class="title is-4" v-money="'R$'">{{ product.PRECO}}  </span>
         </p>
       </div>
       <div class="card-footer btn-actions">
@@ -56,7 +56,7 @@
                 <select @change="onSelectQuantity(product.ID_PRODUTO)" v-model="selected">
                   <option v-for="quantity in quantityArray" :value="quantity">{{ quantity }}</option>
                 </select>
-                {{selected}}
+                
               </div>
             </div>
           </div>

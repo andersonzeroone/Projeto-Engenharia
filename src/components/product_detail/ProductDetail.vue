@@ -52,9 +52,7 @@
             <i class="fa fa-star"></i>
           </div>
           <div class="card-content__reviews">
-            <div class="is-pulled-left">
-              <p><strong>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</strong></p>
-            </div>
+       
             <div class="select is-rounded is-small is-pulled-right">
               <select @change="onSelectQuantity(product.ID_PRODUTO)" v-model="selected">
                 <option v-for="quantity in quantityArray" :value="quantity">{{ quantity }}</option>
@@ -62,7 +60,7 @@
             </div>
           </div>
           <div class="card-content__price is-pulled-left">
-            <span class="title is-3" v-money="'R$'">{{ product.PRECO }}</span>
+            <span class="title is-3" > R$ {{ product.PRECO }} </span>
           </div>
           <div class="card-content__btn is-pulled-right">
             <button class="button is-primary" v-if="!isAddedBtn" @click="addToCart(product.ID_PRODUTo)">{{ addToCartLabel }}</button>
@@ -102,12 +100,20 @@ export default {
   },
   methods: {
     addToCart (id) {
+    
       let data = {
-        id:product.ID_PRODUTO,
+        user_id:5,
+        produto_id: id,
+        quantity: this.selected,
+        cnpj:'00428414000116',
         status: true
+  
       }
-      this.$store.commit('addToCart',product.ID_PRODUTO);
-      this.$store.commit('setAddedBtn', data);
+      //this.$store.commit('addToCart', id);
+    
+      this.$store.dispatch('addToCart', data)
+      this.$store.dispatch('getCart')
+      //this.$store.commit('setAddedBtn', data);
     },
     removeFromCart (id) {
       let data = {

@@ -8,7 +8,7 @@
 			</header>
 			<section class="modal-card-body">
 				<div v-if="!isCheckoutSection">
-					<div class="box" v-for="product in products" :key="product.id">
+					<div class="box" v-for="product in cart" :key="product.id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.ID_PRODUTO)">{{ removeLabel }}</button>
 						<p>{{ product.PRODUTO.slice(0,13) }}  {{ product.quantity > 0 ?  ` - Quantity: ${product.quantity}` : ''}}</p>
 						<p>{{ product.PRECO }} &euro;</p>
@@ -39,13 +39,14 @@ export default {
 			removeLabel: 'Remove from cart',
 			cartEmptyLabel: 'Your cart is empty',
 			closeLabel: 'Close',
-			isCheckoutSection: false
+			isCheckoutSection: false,
+			cart: this.$store.state.cart.produtos
 		}
 	},
 
 	computed: {
 			products () {
-				return this.$store.getters.productsAdded;
+				return this.$store.getters.productsAdded2;
 			},
 			openModal () {
 				if (this.$store.getters.isCheckoutModalOpen) {
@@ -62,13 +63,13 @@ export default {
 						finalPrice = '',
 						quantity = 1;
 
-				productsAdded.forEach(product => {
+				this.cart.forEach(product => {
 
 					if (product.quantity >= 1) {
 						quantity = product.quantity;
 					}
 
-					pricesArray.push((product.price * quantity)); // get the price of every product added and multiply quantity
+					pricesArray.push((product.PRECO * quantity)); // get the price of every product added and multiply quantity
 				});
 
 				finalPrice = pricesArray.reduce((a, b) => a + b, 0); // sum the prices
