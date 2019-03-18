@@ -85,6 +85,19 @@ export default new Vuex.Store({
     state.cart.total = produtos.length
     state.cart.produtos = produtos
 
+    //console.log(state.cart.produtos[0])
+   // console.log(state.products.length)
+
+    for (let count  = 0; count < state.cart.total; count++){
+      for (let count2 = 0; count2 < state.products.length; count2++){
+        //console.log(state.cart.produtos[count] + `aqui` + state.products[count2].ID_PRODUTO)
+       // console.log(state.cart.produtos[count])
+        if (state.cart.produtos[count].produto_id == state.products[count2].ID_PRODUTO){
+          state.cart.produtos[count].PRODUTO = state.products[count2].PRODUTO
+        }
+      }
+    }
+
     },
     addToCart: (state, id) => {
       state.products.forEach(el => {
@@ -173,7 +186,7 @@ export default new Vuex.Store({
         .get(`${this.state.server}/api/produtos`, {headers})
         .then(response => {
           let list = [];
-          console.log(response.data)
+          //console.log(response.data)
 
           this.state.products = response.data;
           
@@ -188,12 +201,12 @@ export default new Vuex.Store({
     },
     getCart({commit}) {
       const self = this
-      console.log(self)
+      //console.log(self)
       let data = {user_id:'5', cnpj:'00428414000116'}
       axios
         .get(`${this.state.server}/api/getCart`,data)
         .then(response => {
-          console.log(response.data)
+          //console.log(response.data)
           commit('setTotal', response.data, response.data.length)
         })
         .catch(error => {
@@ -202,7 +215,7 @@ export default new Vuex.Store({
     },
     addToCart({commit}, payload){
       let selfe = this
-      console.log(payload)
+      //console.log(payload)
      // axios.post("http://191.252.103.186/api/addToCart")
       axios.post(`${this.state.server}/api/addToCart`, payload)
           .then(response => {
@@ -210,12 +223,12 @@ export default new Vuex.Store({
           this.state.products.forEach(el => {
             if (payload.produto_id === el.ID_PRODUTO ) {
               el.isAddedToCart = true;
-              console.log(el)
+              //console.log(el)
 
             }
           });
       
-        console.log(response);
+        //console.log(response);
       }).catch(
         console.log("Deu merda!!")
       )
